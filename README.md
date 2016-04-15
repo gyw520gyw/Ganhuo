@@ -1,11 +1,11 @@
-2016.04.14
+2016.04.14<br>
 创建项目Ganhuo
 
-2016.04.15
+2016.04.15<br>
 实现网络请求
 
 详情可见：   
-http://gank.io/api
+http://gank.io/api<br>
 http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/1109/3662.html
 http://jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/1016/3588.html
 
