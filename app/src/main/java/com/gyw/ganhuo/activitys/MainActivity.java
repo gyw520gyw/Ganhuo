@@ -1,7 +1,10 @@
 package com.gyw.ganhuo.activitys;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.gyw.ganhuo.R;
@@ -9,6 +12,7 @@ import com.gyw.ganhuo.http.GanApi;
 import com.gyw.ganhuo.http.GanUri;
 import com.gyw.ganhuo.http.MainFactory;
 import com.gyw.ganhuo.model.GanData;
+import com.gyw.ganhuo.utils.StatusBarUtil;
 
 import java.util.List;
 
@@ -19,7 +23,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseAcitivty {
 
     @Bind(R.id.tv)
     TextView mTv;
@@ -27,16 +31,16 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.content)
     TextView mContent;
 
-    GanApi mGanApi = MainFactory.getGanApiInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        super.onCreate(savedInstanceState);
+    }
 
-
-
+    @Override
+    protected void initData() {
         mGanApi.getGanData(GanUri.TYPE_ANDROID, 10, 1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -60,6 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 mContent.setText(resultsEntities.toString());
             }
         });
-
     }
+
 }
