@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Ganhuo</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- 首页topbar 顶部元素-->
+    <string name="main_gril">福利</string>
+    <string name="main_diso">发现</string>
+    <string name="main_mine">我的</string>
 </resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <!-- RsTopBar -->
+    <declare-styleable name="TopBar">
+        <attr name="leftSrc" format="reference"></attr>
+        <attr name="centerText" format="string"></attr>
+        <attr name="rightSrc" format="reference"></attr>
+        <attr name="isShowLeft" format="boolean"></attr>
+        <attr name="isShowRight" format="boolean"></attr>
+        <attr name="barBg" format="reference|color"></attr>
+    </declare-styleable>
+
+
+    
+
+</resources>

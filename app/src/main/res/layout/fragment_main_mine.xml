@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:rs="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <com.gyw.ganhuo.weiget.TopBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:centerText="@string/main_mine"
+        app:isShowLeft="false"
+        app:isShowRight="false">
+    </com.gyw.ganhuo.weiget.TopBar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/main_mine" />
+
+</LinearLayout>

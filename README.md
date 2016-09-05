@@ -22,5 +22,15 @@ String BASE_API = "http://gank.io/api/data"
 2016.04.25<br/>
 实现沉浸式状态栏
 
+
 参考：
 https://github.com/laobie/StatusBarUtil
+
+
+
+2016.08.01<br/>
+实现首页基本样式,底部tab
+
+2016.09.05
+1.使用FragmentTabHost，创建对应fragment;
+2.使用自定义组合控件Topbar;
