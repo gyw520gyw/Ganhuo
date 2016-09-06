@@ -38,14 +38,14 @@ public class UiUtil {
 	}
 	
 	/** 获取drawable */
-	public static Drawable getDrawable(int resId) {
-		return getResources().getDrawable(resId);
-	}
-
-	/** 获取颜色 */
-	public static int getColor(int resId) {
-		return getResources().getColor(resId);
-	}
+//	public static Drawable getDrawable(int resId) {
+//		return getResources().getDrawable(resId);
+//	}
+//
+//	/** 获取颜色 */
+//	public static int getColor(int resId) {
+//		return getResources().getColor(resId);
+//	}
 	
 	/**获取长度*/
 	public static float getDimension(int resId) {
@@ -112,91 +112,5 @@ public class UiUtil {
 	public static int px2dip(int px) {
 		final float scale = getContext().getResources().getDisplayMetrics().density;
 		return (int) (px / scale + 0.5f);
-	}
-
-	/**
-	 * 色块效果
-	 * @param context
-	 * @param color		内部填充色
-	 * @return
-	 */
-	public static GradientDrawable MAIN_RADIO_NOBORD(Context context,int color){
-		GradientDrawable gd=new GradientDrawable();
-		gd.setColor(color);
-		int radio=dip2px(4);
-		gd.setCornerRadii(new float[] { radio, radio, radio, radio,radio, radio, radio, radio });
-		gd.setShape(GradientDrawable.RECTANGLE);//设置形状为矩形
-		return gd;
-	}
-	/**
-	 * 边框效果
-	 * @param context
-	 * @param color			内部填充色
-	 * @param stokecolor	边框色
-	 * @param stokeWidth	边框宽度
-	 * @return
-	 */
-	public static GradientDrawable MAIN_RADIO_BORD(Context context,int color,int stokecolor,int stokeWidth){
-		GradientDrawable gd=new GradientDrawable();
-		gd.setStroke(stokeWidth, stokecolor);
-		gd.setColor(color);
-		int radio=dip2px(4);
-		gd.setCornerRadii(new float[] { radio, radio, radio, radio,radio, radio, radio, radio });
-		gd.setShape(GradientDrawable.RECTANGLE);//设置形状为矩形
-		return gd;
-	}
-	
-	/**
-	 * 边框圆角效果
-	 * @param context
-	 * @param color			内部填充色
-	 * @param stokecolor	边框色
-	 * @param stokeWidth	边框宽度
-	 * @param radio			圆角度
-	 * @return
-	 */
-	public static GradientDrawable MAIN_RADIO_BORD(Context context,int color,int stokecolor,int stokeWidth, int radio){
-		GradientDrawable gd=new GradientDrawable();
-		gd.setStroke(stokeWidth, stokecolor);
-		gd.setColor(color);
-		gd.setCornerRadii(new float[] { radio, radio, radio, radio,radio, radio, radio, radio });
-		gd.setShape(GradientDrawable.RECTANGLE);//设置形状为矩形
-		return gd;
-	}
-	
-	/**
-	 * 右侧边框圆角效果
-	 * @param context
-	 * @param color			内部填充色
-	 * @param stokecolor	边框色
-	 * @param stokeWidth	边框宽度
-	 * @param radio         圆角
-	 * @return
-	 */
-	public static GradientDrawable MAIN_RADIO_BORD_RIGHT(Context context,int color,int stokecolor,int stokeWidth, int radio){
-		GradientDrawable gd=new GradientDrawable();
-		gd.setStroke(stokeWidth, stokecolor);
-		gd.setColor(color);
-		gd.setCornerRadii(new float[] { 0, 0, radio, radio,radio, radio, 0, 0 });
-		gd.setShape(GradientDrawable.RECTANGLE);//设置形状为矩形
-		return gd;
-	}
-	
-	/**
-	 * 左侧边框圆角效果
-	 * @param context
-	 * @param color			内部填充色
-	 * @param stokecolor	边框色
-	 * @param stokeWidth	边框宽度
-	 * @param radio         圆角
-	 * @return
-	 */
-	public static GradientDrawable MAIN_RADIO_BORD_LEFT(Context context,int color,int stokecolor,int stokeWidth, int radio){
-		GradientDrawable gd=new GradientDrawable();
-		gd.setStroke(stokeWidth, stokecolor);
-		gd.setColor(color);
-		gd.setCornerRadii(new float[] { radio, radio, 0, 0,0, 0, radio, radio });
-		gd.setShape(GradientDrawable.RECTANGLE);//设置形状为矩形
-		return gd;
 	}
 }

@@ -31,6 +31,11 @@ https://github.com/laobie/StatusBarUtil
 2016.08.01<br/>
 实现首页基本样式,底部tab
 
-2016.09.05
-1.使用FragmentTabHost，创建对应fragment;
-2.使用自定义组合控件Topbar;
+2016.09.05<br/>
+1.使用FragmentTabHost，创建对应fragment;<br/>
+2.使用自定义组合控件Topbar;<br/>
+
+
+2016.09.06<br/>
+1.请求福利类型的接口成功，初步完成福利模块;<br/>
+最近电脑出了点问题，只要一翻墙，就出现资源管理器不断重启，所以没有升级AndroidStudio..<br/>

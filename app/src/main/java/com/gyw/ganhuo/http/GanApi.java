@@ -2,6 +2,7 @@ package com.gyw.ganhuo.http;
 
 
 import com.gyw.ganhuo.model.GanData;
+import com.gyw.ganhuo.model.GrilData;
 
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -14,6 +15,6 @@ public interface GanApi {
 
     //http://gank.io/api/data/Android/10/1
     @GET("{type}/{pageSize}/{pageIndex}")
-    Observable<GanData> getGanData(@Path("type") String type, @Path("pageSize") int pageSize, @Path("pageIndex") int pageIndex);
+    Observable<GrilData> getGanData(@Path("type") String type, @Path("pageSize") int pageSize, @Path("pageIndex") int pageIndex);
 
 }

@@ -17,8 +17,6 @@ import com.gyw.ganhuo.utils.StatusBarUtil;
  */
 public abstract class BaseActivity extends FragmentActivity {
 
-    GanApi mGanApi = MainFactory.getGanApiInstance();
-
     public static BaseActivity mActivity;
 
     @Override

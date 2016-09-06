@@ -16,14 +16,8 @@ import com.gyw.ganhuo.fragments.MainMineFragment;
 
 import butterknife.ButterKnife;
 
+
 public class MainActivity extends BaseActivity {
-
-//    @Bind(R.id.tv)
-//    TextView mTv;
-//
-//    @Bind(R.id.content)
-//    TextView mContent;
-
 
     //定义FragmentTabHost对象
     private FragmentTabHost mTabHost;
@@ -93,34 +87,5 @@ public class MainActivity extends BaseActivity {
 
         return view;
     }
-
-
-
-  /*  @Override
-    protected void initData() {
-        mGanApi.getGanData(GanUri.TYPE_ANDROID, 10, 1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(new Func1<GanData, List<GanData.ResultsEntity>>() {
-                    public List<GanData.ResultsEntity> call(GanData data) {
-                        return data.getResults();
-                    }
-                }).subscribe(new Subscriber<List<GanData.ResultsEntity>>() {
-            @Override
-            public void onCompleted() {
-                mTv.setText("加载完成");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                mTv.setText("加载失败" + e.toString());
-            }
-
-            @Override
-            public void onNext(List<GanData.ResultsEntity> resultsEntities) {
-                mContent.setText(resultsEntities.toString());
-            }
-        });
-    }*/
 
 }

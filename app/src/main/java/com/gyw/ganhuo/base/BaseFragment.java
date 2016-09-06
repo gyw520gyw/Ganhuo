@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
  * @time: 2015-8-19 上午11:43:49
  * @fun:
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
 	public static final String ARG_PARAM1 = "arg_param1";
 	public static final String ARG_PARAM2 = "arg_param2";
 	public static final String ARG_PARAM3 = "arg_param3";
@@ -27,12 +27,12 @@ public abstract class BaseFragment extends Fragment {
 	protected View view = null;
 	protected Context mContext = null;
 	
-//	protected P p;
+	protected P p;
 
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		mActivity = (BaseActivity) activity;
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		mActivity = (BaseActivity) context;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public abstract class BaseFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		if (view == null) {
-			view = initContentView(inflater);
+			view = initContentView(inflater, container);
 			ButterKnife.bind(this, view);
 			initView();
 			initData();
@@ -74,7 +74,7 @@ public abstract class BaseFragment extends Fragment {
 	/**
 	 * 设置布局文件
 	 */
-	protected abstract View initContentView(LayoutInflater inflater);
+	protected abstract View initContentView(LayoutInflater inflater, ViewGroup container);
 
 	/**
 	 * 初始化布局文件中的控件
