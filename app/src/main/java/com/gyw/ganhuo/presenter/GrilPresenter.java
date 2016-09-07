@@ -3,7 +3,6 @@ package com.gyw.ganhuo.presenter;
 import android.content.Context;
 
 import com.gyw.ganhuo.base.BasePresenter;
-import com.gyw.ganhuo.base.IBaseView;
 import com.gyw.ganhuo.http.GanUri;
 import com.gyw.ganhuo.model.GanData;
 import com.gyw.ganhuo.model.GrilData;
@@ -11,9 +10,11 @@ import com.gyw.ganhuo.presenter.view.GrilView;
 
 import java.util.List;
 
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
+import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 /**
@@ -29,29 +30,46 @@ public class GrilPresenter extends BasePresenter<GrilView> {
 
 
     public void getDataFromServer() {
+
         mGanApi.getGanData(GanUri.TYPE_FULI, 10, 1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(new Func1<GrilData, List<GrilData.ResultsEntity>>() {
-                    public List<GrilData.ResultsEntity> call(GrilData data) {
-                        return data.getResults();
+                .map(new Func1<GrilData, List<GanData>>() {
+                    public List<GanData> call(GrilData data) {
+                        //获取数据
+                        return data.results;
                     }
-                }).subscribe(new Subscriber<List<GrilData.ResultsEntity>>() {
-            @Override
-            public void onCompleted() {
-            }
+                })
+                .flatMap(new Func1<List<GanData>, Observable<GanData>>() {
+                    @Override
+                    public Observable<GanData> call(List<GanData> ganDatas) {
+                        return Observable.from(ganDatas);
+                    }
+                })
+                .toSortedList(new Func2<GanData, GanData, Integer>() {
+                    @Override
+                    public Integer call(GanData ganData, GanData ganData2) {
+                        //按照上传时间排序
+                        return ganData2.publishedAt.compareTo(ganData.publishedAt);
+                    }
+                })
+                .subscribe(new Subscriber<List<GanData>>() {
+                    @Override
+                    public void onCompleted() {
 
-            @Override
-            public void onError(Throwable e) {
-            }
+                    }
 
-            @Override
-            public void onNext(List<GrilData.ResultsEntity> resultsEntities) {
-//                mContent.setText(resultsEntities.toString());
+                    @Override
+                    public void onError(Throwable e) {
 
-                mView.handleData(resultsEntities);
-            }
-        });
+                    }
+
+                    @Override
+                    public void onNext(List<GanData> ganDatas) {
+                        //处理数据
+                        mView.handleData(ganDatas);
+                    }
+                });
     }
 
 

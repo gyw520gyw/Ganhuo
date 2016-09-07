@@ -1,6 +1,5 @@
 package com.gyw.ganhuo.fragments;
 
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -11,6 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.gyw.ganhuo.R;
 import com.gyw.ganhuo.base.BaseFragment;
+import com.gyw.ganhuo.model.GanData;
 import com.gyw.ganhuo.model.GrilData;
 import com.gyw.ganhuo.presenter.GrilPresenter;
 import com.gyw.ganhuo.presenter.view.GrilView;
@@ -53,7 +53,7 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
 
 
     @Override
-    public void handleData(List<GrilData.ResultsEntity> list) {
+    public void handleData(List<GanData> list) {
 
 
         mRv.setAdapter(new GrilAdapter(list));
@@ -62,9 +62,9 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
 
     public class GrilAdapter extends RecyclerView.Adapter<GrilAdapter.GrilViewHolder> {
 
-        List<GrilData.ResultsEntity> list;
+        List<GanData> list;
 
-        public GrilAdapter(List<GrilData.ResultsEntity> list) {
+        public GrilAdapter(List<GanData> list) {
             this.list = list;
         }
 
@@ -78,7 +78,7 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
         @Override
         public void onBindViewHolder(GrilViewHolder holder, int position) {
 
-            String url = list.get(position).getUrl();
+            String url = list.get(position).url;
 
             Glide.with(UiUtil.getContext())
                     .load(url).into(holder.mIv);

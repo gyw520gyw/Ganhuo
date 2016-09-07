@@ -1,7 +1,6 @@
 package com.gyw.ganhuo.http;
 
 
-import com.gyw.ganhuo.model.GanData;
 import com.gyw.ganhuo.model.GrilData;
 
 import retrofit.http.GET;
