@@ -23,15 +23,15 @@ import rx.schedulers.Schedulers;
  */
 public class GrilPresenter extends BasePresenter<GrilView> {
 
+    private static final int PAGE_SIZE = 10;
 
     public GrilPresenter(Context context, GrilView view) {
         super(context, view);
     }
 
+    public void getDataFromServer(int currentPage) {
 
-    public void getDataFromServer() {
-
-        mGanApi.getGanData(GanUri.TYPE_FULI, 10, 1)
+        mGanApi.getGanData(GanUri.TYPE_FULI, PAGE_SIZE, currentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<GrilData, List<GanData>>() {
@@ -68,6 +68,7 @@ public class GrilPresenter extends BasePresenter<GrilView> {
                     public void onNext(List<GanData> ganDatas) {
                         //处理数据
                         mView.handleData(ganDatas);
+                        mView.getDataFinished();
                     }
                 });
     }

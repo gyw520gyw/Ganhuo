@@ -39,3 +39,7 @@ https://github.com/laobie/StatusBarUtil
 2016.09.06<br/>
 1.请求福利类型的接口成功，初步完成福利模块;<br/>
 最近电脑出了点问题，只要一翻墙，就出现资源管理器不断重启，所以没有升级AndroidStudio..<br/>
+
+
+2016.09.08<br/>
+1.使用SwipeRefreshLayout做下拉刷新操作功能;

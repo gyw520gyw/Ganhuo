@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface GrilView extends IBaseView<List<GanData>> {
 
+    //数据请求完成
+    void getDataFinished();
 }
