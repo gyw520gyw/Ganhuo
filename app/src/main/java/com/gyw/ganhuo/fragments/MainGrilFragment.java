@@ -7,35 +7,42 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.gyw.ganhuo.R;
+import com.gyw.ganhuo.adapters.GrilAdapter;
 import com.gyw.ganhuo.base.BaseFragment;
 import com.gyw.ganhuo.model.GanData;
 import com.gyw.ganhuo.presenter.GrilPresenter;
 import com.gyw.ganhuo.presenter.view.GrilView;
-import com.gyw.ganhuo.utils.TransfUtil;
-import com.gyw.ganhuo.utils.UiUtil;
+import com.gyw.ganhuo.utils.LogUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 
+/**
+ * 首页福利模块
+ */
 public class MainGrilFragment extends BaseFragment<GrilPresenter> implements GrilView {
 
     @Bind(R.id.rv_main_gril)
-    RecyclerView mRv;
+    RecyclerView mRecyclerView;
 
 
     @Bind(R.id.srl_main_gril)
-    SwipeRefreshLayout mSwipeRl;
+    SwipeRefreshLayout mRefreshLayout;
 
 
     private int mCurrentPage = 1;
+
+    private GrilAdapter adapter;
+
+    private StaggeredGridLayoutManager layoutManager;
+
+
+    private boolean isRefresh = true;   //是否是刷新,默认是刷新
 
 
     @Override
@@ -48,13 +55,14 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
     protected void initView() {
 
         //第一次进入页面的时候显示加载进度条
-        mSwipeRl.setProgressViewOffset(false, 0, (int) TypedValue
+        mRefreshLayout.setProgressViewOffset(false, 0, (int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources()
                         .getDisplayMetrics()));
-        mSwipeRl.setRefreshing(true);
+        mRefreshLayout.setRefreshing(true);
 
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRv.setLayoutManager(layoutManager);
+        //设置RecyclerView
+        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
 
     }
 
@@ -64,89 +72,93 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
         p.getDataFromServer(mCurrentPage);
     }
 
+
     @Override
     protected void initListener() {
-        mSwipeRl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+        //TODO 后期提出去 需优化
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
+                isRefresh = true;
+
+                mCurrentPage = 1;
 
                 p.getDataFromServer(mCurrentPage);
 
             }
         });
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+//                mRefreshLayout.isRefreshing()
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int pastVisibleItems = layoutManager.findFirstVisibleItemPositions(new int[2])[1];
+
+                LogUtil.d("visibleItemCount : " + visibleItemCount + " totalItemCount : " + totalItemCount + " pastVisibleItems :  " + pastVisibleItems);
+
+                if (!mRefreshLayout.isRefreshing() && (visibleItemCount + pastVisibleItems) > totalItemCount) {
+
+                    isRefresh = false;
+
+                    mCurrentPage = mCurrentPage + 1;
+
+                    loadMoreData();
+                }
+            }
+        });
     }
 
-    GrilAdapter adapter;
+    private void loadMoreData() {
+
+        LogUtil.d("mCurrentPage : " + mCurrentPage);
+
+        p.getDataFromServer(mCurrentPage);
+    }
+
+
+    private List<GanData> ganDataList = new ArrayList<>();
+
     @Override
     public void handleData(List<GanData> list) {
-        if(adapter == null) {
-            adapter = new GrilAdapter(list);
-            mRv.setAdapter(adapter);
+
+        LogUtil.d("isRefresh : " + isRefresh + " list : " + list.toString());
+
+        //刷新,先清除数据
+        if (isRefresh) {
+            ganDataList.clear();
+        }
+
+        //加载数据,直接添加
+        ganDataList.addAll(list);
+
+        if (adapter == null) {
+            adapter = new GrilAdapter(ganDataList);
+            mRecyclerView.setAdapter(adapter);
         } else {
             adapter.notifyDataSetChanged();
         }
 
     }
 
+    //TODO 后期提出去 需优化
     @Override
     public void getDataFinished() {
 
         //数据加载完成
-        mSwipeRl.postDelayed(new Runnable() {
+        mRefreshLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mSwipeRl.setRefreshing(false);
+                mRefreshLayout.setRefreshing(false);
             }
         }, 1000);
 
     }
 
 
-    public class GrilAdapter extends RecyclerView.Adapter<GrilAdapter.GrilViewHolder> {
-
-        List<GanData> list;
-
-        public GrilAdapter(List<GanData> list) {
-            this.list = list;
-        }
-
-        @Override
-        public GrilViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(UiUtil.getContext()).inflate(R.layout.item_gril_adapter, parent, false);
-            GrilViewHolder holder = new GrilViewHolder(view);
-            return holder;
-        }
-
-        @Override
-        public void onBindViewHolder(GrilViewHolder holder, int position) {
-
-            GanData data = list.get(position);
-            String url = data.url;
-            String time = data.publishedAt;
-
-            Glide.with(UiUtil.getContext())
-                    .load(url).into(holder.mItemIv);
-
-            holder.mItemTv.setText(TransfUtil.formatPublishedAt(time));
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
-        }
-
-        public class GrilViewHolder extends RecyclerView.ViewHolder {
-
-            @Bind(R.id.iv_gril_item)
-            ImageView mItemIv;
-
-            @Bind(R.id.tv_gril_item)
-            TextView mItemTv;
-
-            public GrilViewHolder(View itemView) {
-                super(itemView);
-                ButterKnife.bind(this, itemView);
-            }
-        }
-    }
 }

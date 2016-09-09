@@ -38,8 +38,19 @@ https://github.com/laobie/StatusBarUtil
 
 2016.09.06<br/>
 1.请求福利类型的接口成功，初步完成福利模块;<br/>
+2.使用Glide加载图片;<br/>
 最近电脑出了点问题，只要一翻墙，就出现资源管理器不断重启，所以没有升级AndroidStudio..<br/>
+
+参考:
+http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0327/2650.html
 
 
 2016.09.08<br/>
 1.使用SwipeRefreshLayout做下拉刷新操作功能;
+
+2016.09.09<br/>
+1.添加加载更多功能;
+
+
+参考:
+Glide : http://blog.csdn.net/shangmingchao/article/details/51125554 , 有很多方法的解释;
