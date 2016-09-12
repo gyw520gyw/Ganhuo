@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gyw.ganhuo.R;
-import com.gyw.ganhuo.adapters.GrilAdapter;
+import com.gyw.ganhuo.adapters.MainGrilAdapter;
 import com.gyw.ganhuo.base.BaseFragment;
 import com.gyw.ganhuo.model.GanData;
 import com.gyw.ganhuo.presenter.GrilPresenter;
@@ -37,7 +37,7 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
 
     private int mCurrentPage = 1;
 
-    private GrilAdapter adapter;
+    private MainGrilAdapter adapter;
 
     private StaggeredGridLayoutManager layoutManager;
 
@@ -138,7 +138,7 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
         ganDataList.addAll(list);
 
         if (adapter == null) {
-            adapter = new GrilAdapter(ganDataList);
+            adapter = new MainGrilAdapter(ganDataList);
             mRecyclerView.setAdapter(adapter);
         } else {
             adapter.notifyDataSetChanged();

@@ -54,3 +54,11 @@ http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0327/2650.html
 
 参考:
 Glide : http://blog.csdn.net/shangmingchao/article/details/51125554 , 有很多方法的解释;
+
+
+
+2016.09.12
+1.初步写了发现模块, 将其分成各个技术模块(android/iOS) ;
+
+参考:
+TabLayout 结合 ViewPager : http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html

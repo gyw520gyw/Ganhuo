@@ -22,11 +22,11 @@ import butterknife.ButterKnife;
  * author: gyw
  * date: 2016/9/9.
  */
-public class GrilAdapter extends RecyclerView.Adapter<GrilAdapter.GrilViewHolder> {
+public class MainGrilAdapter extends RecyclerView.Adapter<MainGrilAdapter.GrilViewHolder> {
 
     private List<GanData> list;
 
-    public GrilAdapter(List<GanData> list) {
+    public MainGrilAdapter(List<GanData> list) {
         this.list = list;
     }
 
