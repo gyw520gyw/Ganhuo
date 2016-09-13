@@ -57,8 +57,17 @@ Glide : http://blog.csdn.net/shangmingchao/article/details/51125554 , 有很多�
 
 
 
-2016.09.12
+2016.09.12<br/>
 1.初步写了发现模块, 将其分成各个技术模块(android/iOS) ;
 
 参考:
 TabLayout 结合 ViewPager : http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html
+
+
+2016.09.13
+1.初步完成发现模块,二级跳转页面还没有写;
+
+参考:
+TabLayout : http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html
+问题:
+TabLayout中的文字如果是字母,那字母都是大写,如何修改?

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.gyw.ganhuo.R;
 import com.gyw.ganhuo.base.BaseActivity;
-import com.gyw.ganhuo.fragments.MainDisoFragment;
+import com.gyw.ganhuo.fragments.MainDiscoFragment;
 import com.gyw.ganhuo.fragments.MainGrilFragment;
 import com.gyw.ganhuo.fragments.MainMineFragment;
 
@@ -26,7 +26,7 @@ public class MainActivity extends BaseActivity {
     private LayoutInflater layoutInflater;
 
     //定义数组来存放Fragment界面
-    private Class fragmentArray[] = {MainGrilFragment.class, MainDisoFragment.class, MainMineFragment.class};
+    private Class fragmentArray[] = {MainGrilFragment.class, MainDiscoFragment.class, MainMineFragment.class};
 
     //定义数组来存放按钮图片
     private int mImageViewArray[] = {R.drawable.main_01_01_gril_selector, R.drawable.main_01_02_diso_selector, R.drawable.main_01_03_mine_selector};

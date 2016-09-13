@@ -38,14 +38,14 @@ public class UiUtil {
 	}
 	
 	/** 获取drawable */
-//	public static Drawable getDrawable(int resId) {
-//		return getResources().getDrawable(resId);
-//	}
-//
-//	/** 获取颜色 */
-//	public static int getColor(int resId) {
-//		return getResources().getColor(resId);
-//	}
+	public static Drawable getDrawable(int resId) {
+		return getResources().getDrawable(resId);
+	}
+
+	/** 获取颜色 */
+	public static int getColor(int resId) {
+		return getResources().getColor(resId);
+	}
 	
 	/**获取长度*/
 	public static float getDimension(int resId) {

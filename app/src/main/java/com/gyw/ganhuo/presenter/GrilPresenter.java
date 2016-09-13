@@ -29,9 +29,9 @@ public class GrilPresenter extends BasePresenter<GrilView> {
         super(context, view);
     }
 
-    public void getDataFromServer(int currentPage) {
+    public void getDataFromServer(String type, int currentPage) {
 
-        mGanApi.getGanData(GanUri.TYPE_FULI, PAGE_SIZE, currentPage)
+        mGanApi.getGanData(type, PAGE_SIZE, currentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<GrilData, List<GanData>>() {

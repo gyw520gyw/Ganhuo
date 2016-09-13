@@ -1,6 +1,8 @@
 package com.gyw.ganhuo.fragments;
 
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.TypedValue;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gyw.ganhuo.R;
+import com.gyw.ganhuo.adapters.DiscoBaseAdapter;
 import com.gyw.ganhuo.adapters.MainGrilAdapter;
 import com.gyw.ganhuo.base.BaseFragment;
 import com.gyw.ganhuo.http.GanUri;
@@ -23,46 +26,60 @@ import java.util.List;
 import butterknife.Bind;
 
 
-/**
- * 首页福利模块
- */
-public class MainGrilFragment extends BaseFragment<GrilPresenter> implements GrilView {
+public class DiscoClassifyFragment extends BaseFragment<GrilPresenter> implements GrilView {
 
-    @Bind(R.id.rv_main_gril)
-    RecyclerView mRecyclerView;
+    private static final String ARG_PARAM1 = "param1";
 
-
-    @Bind(R.id.srl_main_gril)
-    SwipeRefreshLayout mRefreshLayout;
-
+    private String mTitle;
 
     private int mCurrentPage = 1;
 
-    private MainGrilAdapter adapter;
-
-    private StaggeredGridLayoutManager layoutManager;
-
+    private LinearLayoutManager layoutManager;
 
     private boolean isRefresh = true;   //是否是刷新,默认是刷新
 
+    private DiscoBaseAdapter adapter;
+
+    @Bind(R.id.rv_disco_classify)
+    RecyclerView mRecyclerView;
+
+
+    @Bind(R.id.srl_disco_classify)
+    SwipeRefreshLayout mRefreshLayout;
+
+
+
+    public static DiscoClassifyFragment newInstance(String param1) {
+        DiscoClassifyFragment fragment = new DiscoClassifyFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mTitle = getArguments().getString(ARG_PARAM1);
+        }
+    }
 
     @Override
     protected View initContentView(LayoutInflater inflater, ViewGroup container) {
-        view = inflater.inflate(R.layout.fragment_main_gril, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_diso_classify, container, false);
     }
 
     @Override
     protected void initView() {
-
-        //第一次进入页面的时候显示加载进度条
+//第一次进入页面的时候显示加载进度条
         mRefreshLayout.setProgressViewOffset(false, 0, (int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources()
                         .getDisplayMetrics()));
         mRefreshLayout.setRefreshing(true);
 
         //设置RecyclerView
-        layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        layoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(layoutManager);
 
     }
@@ -70,9 +87,8 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
     @Override
     protected void initData() {
         p = new GrilPresenter(mContext, this);
-        p.getDataFromServer(GanUri.TYPE_FULI, mCurrentPage);
+        p.getDataFromServer(mTitle, mCurrentPage);
     }
-
 
     @Override
     protected void initListener() {
@@ -86,7 +102,7 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
 
                 mCurrentPage = 1;
 
-                p.getDataFromServer(GanUri.TYPE_FULI, mCurrentPage);
+                p.getDataFromServer(mTitle, mCurrentPage);
 
             }
         });
@@ -99,11 +115,11 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
 //                mRefreshLayout.isRefreshing()
                 int visibleItemCount = layoutManager.getChildCount();
                 int totalItemCount = layoutManager.getItemCount();
-                int pastVisibleItems = layoutManager.findFirstVisibleItemPositions(new int[2])[1];
+                int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
 
                 LogUtil.d("visibleItemCount : " + visibleItemCount + " totalItemCount : " + totalItemCount + " pastVisibleItems :  " + pastVisibleItems);
 
-                if (!mRefreshLayout.isRefreshing() && (visibleItemCount + pastVisibleItems) > totalItemCount) {
+                if (!mRefreshLayout.isRefreshing() && (visibleItemCount + pastVisibleItems) >= totalItemCount) {
 
                     isRefresh = false;
 
@@ -115,13 +131,24 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
         });
     }
 
+
     private void loadMoreData() {
 
         LogUtil.d("mCurrentPage : " + mCurrentPage);
 
-        p.getDataFromServer(GanUri.TYPE_FULI, mCurrentPage);
+        p.getDataFromServer(mTitle, mCurrentPage);
     }
 
+    @Override
+    public void getDataFinished() {
+        //数据加载完成
+        mRefreshLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mRefreshLayout.setRefreshing(false);
+            }
+        }, 1000);
+    }
 
     private List<GanData> ganDataList = new ArrayList<>();
 
@@ -139,25 +166,10 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
         ganDataList.addAll(list);
 
         if (adapter == null) {
-            adapter = new MainGrilAdapter(ganDataList);
+            adapter = new DiscoBaseAdapter(ganDataList);
             mRecyclerView.setAdapter(adapter);
         } else {
             adapter.notifyDataSetChanged();
         }
-
-    }
-
-    //TODO 后期提出去 需优化
-    @Override
-    public void getDataFinished() {
-
-        //数据加载完成
-        mRefreshLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mRefreshLayout.setRefreshing(false);
-            }
-        }, 1000);
-
     }
 }

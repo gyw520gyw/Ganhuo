@@ -10,6 +10,9 @@
     <array name="main_diso_title_arr">
         <item name="diso_title_android">Android</item>
         <item name="diso_title_ios">iOS</item>
+        <item name="diso_title_front">前端</item>
+        <item name="diso_title_source">拓展资源</item>
+        <item name="diso_title_recommend">瞎推荐</item>
     </array>
 
     <!-- TODO: Remove or change this placeholder text -->

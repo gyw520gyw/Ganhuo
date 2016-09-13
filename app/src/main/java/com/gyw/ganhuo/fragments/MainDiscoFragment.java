@@ -16,7 +16,7 @@ import java.util.List;
 
 import butterknife.Bind;
 
-public class MainDisoFragment extends BaseFragment {
+public class MainDiscoFragment extends BaseFragment {
 
     @Bind(R.id.tl_main_diso)
     TabLayout mTabLayout;
@@ -32,7 +32,7 @@ public class MainDisoFragment extends BaseFragment {
 
     @Override
     protected View initContentView(LayoutInflater inflater, ViewGroup container) {
-        view = inflater.inflate(R.layout.fragment_main_diso, container, false);
+        view = inflater.inflate(R.layout.fragment_main_disco, container, false);
         return view;
     }
 
@@ -46,11 +46,16 @@ public class MainDisoFragment extends BaseFragment {
         titleArr = UiUtil.getStringArray(R.array.main_diso_title_arr);
         fragmentList =  new ArrayList<BaseFragment>();
 
-        fragmentList.add(DisoAndroidFragment.newInstance());
-        fragmentList.add(DisoIosFragment.newInstance());
+        for(String title : titleArr) {
+            fragmentList.add(DiscoClassifyFragment.newInstance(title));
+        }
+
 
         mViewPager.setAdapter(new MainDisoAdapter(getChildFragmentManager(), titleArr, fragmentList));
+
+        // setupWithViewPager必须在ViewPager.setAdapter() 之后调用
         mTabLayout.setupWithViewPager(mViewPager);
+
     }
 
     @Override

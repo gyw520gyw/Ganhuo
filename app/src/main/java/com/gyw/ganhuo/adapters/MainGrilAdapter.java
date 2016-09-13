@@ -32,7 +32,7 @@ public class MainGrilAdapter extends RecyclerView.Adapter<MainGrilAdapter.GrilVi
 
     @Override
     public GrilViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(UiUtil.getContext()).inflate(R.layout.item_gril_adapter, parent, false);
+        View view = LayoutInflater.from(UiUtil.getContext()).inflate(R.layout.item_gril_main, parent, false);
         GrilViewHolder holder = new GrilViewHolder(view);
         return holder;
     }
