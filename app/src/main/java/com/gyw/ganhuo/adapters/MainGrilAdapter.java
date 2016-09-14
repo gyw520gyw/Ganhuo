@@ -1,5 +1,7 @@
 package com.gyw.ganhuo.adapters;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.gyw.ganhuo.R;
 import com.gyw.ganhuo.model.GanData;
 import com.gyw.ganhuo.utils.TransfUtil;
@@ -46,11 +50,11 @@ public class MainGrilAdapter extends RecyclerView.Adapter<MainGrilAdapter.GrilVi
 
         Glide.with(UiUtil.getContext())
                 .load(url)
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.loading_icon)
+                .error(R.mipmap.loading_icon)
                 //重新设置Target的宽高值（单位为pixel）,不然加载出来的图片会和默认图片一样大
                 //TODO 这里的两个值需要研究一下
-                .override(600, 800)
+                .override(600, 600)
                 .fitCenter()
                 .into(holder.mItemIv);
 
@@ -76,3 +80,4 @@ public class MainGrilAdapter extends RecyclerView.Adapter<MainGrilAdapter.GrilVi
         }
     }
 }
+

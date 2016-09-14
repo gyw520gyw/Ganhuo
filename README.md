@@ -64,10 +64,18 @@ Glide : http://blog.csdn.net/shangmingchao/article/details/51125554 , 有很多�
 TabLayout 结合 ViewPager : http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html
 
 
-2016.09.13
+2016.09.13<br/>
 1.初步完成发现模块,二级跳转页面还没有写;
 
 参考:
 TabLayout : http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html
 问题:
 TabLayout中的文字如果是字母,那字母都是大写,如何修改?
+
+
+2016.09.14
+1. 添加发现模块的加载更多的footer;
+
+参考:
+RecyclerView加载更多添加footer:  http://blog.csdn.net/dalancon/article/details/46125667
+此种方法简单, 感觉不适合配合TabLayout一起使用,TotalCount不好判断;
