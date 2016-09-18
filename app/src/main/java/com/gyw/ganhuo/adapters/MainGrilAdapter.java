@@ -14,8 +14,10 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.gyw.ganhuo.R;
 import com.gyw.ganhuo.model.GanData;
+import com.gyw.ganhuo.utils.DisplayUtil;
 import com.gyw.ganhuo.utils.TransfUtil;
 import com.gyw.ganhuo.utils.UiUtil;
+import com.gyw.ganhuo.weiget.RatioImageView;
 
 import java.util.List;
 
@@ -52,10 +54,10 @@ public class MainGrilAdapter extends RecyclerView.Adapter<MainGrilAdapter.GrilVi
                 .load(url)
                 .placeholder(R.mipmap.loading_icon)
                 .error(R.mipmap.loading_icon)
-                //重新设置Target的宽高值（单位为pixel）,不然加载出来的图片会和默认图片一样大
-                //TODO 这里的两个值需要研究一下
+//                //重新设置Target的宽高值（单位为pixel）,不然加载出来的图片会和默认图片一样大
+//                //TODO 这里的两个值需要研究一下
                 .override(600, 600)
-                .fitCenter()
+                .centerCrop()
                 .into(holder.mItemIv);
 
         holder.mItemTv.setText(TransfUtil.formatPublishedAt(time));
@@ -69,7 +71,7 @@ public class MainGrilAdapter extends RecyclerView.Adapter<MainGrilAdapter.GrilVi
     public class GrilViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.iv_gril_item)
-        ImageView mItemIv;
+        RatioImageView mItemIv;
 
         @Bind(R.id.tv_gril_item)
         TextView mItemTv;
@@ -77,6 +79,10 @@ public class MainGrilAdapter extends RecyclerView.Adapter<MainGrilAdapter.GrilVi
         public GrilViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            mItemIv.setOriginalSize(3, 4);
+
+
         }
     }
 }

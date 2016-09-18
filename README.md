@@ -79,3 +79,7 @@ TabLayout中的文字如果是字母,那字母都是大写,如何修改?
 参考:
 RecyclerView加载更多添加footer:  http://blog.csdn.net/dalancon/article/details/46125667
 此种方法简单, 感觉不适合配合TabLayout一起使用,TotalCount不好判断;
+
+
+2016.09.18
+1. 添加发现模块详情页;

@@ -54,6 +54,8 @@ public class MainDiscoFragment extends BaseFragment {
         mViewPager.setAdapter(new MainDisoAdapter(getChildFragmentManager(), titleArr, fragmentList));
 
         // setupWithViewPager必须在ViewPager.setAdapter() 之后调用
+        // 小屏手机显示不下
+        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         mTabLayout.setupWithViewPager(mViewPager);
 
     }

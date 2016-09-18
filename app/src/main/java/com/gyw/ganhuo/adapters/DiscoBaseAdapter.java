@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gyw.ganhuo.R;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit.http.Query;
 
 /**
  * author: gyw
@@ -25,6 +27,7 @@ import butterknife.ButterKnife;
 public class DiscoBaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<GanData> list;
+    private OnItemClickListener listener;
 
     private static final int TYPE_LOADING_MORE = -1;
     private static final int NOMAL_ITEM = 1;
@@ -72,10 +75,10 @@ public class DiscoBaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     //正常加载
-    private void bindViewHolderNomal(DiscoViewHolder holder, int position) {
+    private void bindViewHolderNomal(final DiscoViewHolder holder, final int position) {
 
         GanData data = list.get(position);
-        String url = data.url;
+        final String url = data.url;
         String time = data.publishedAt;
 
 
@@ -83,8 +86,25 @@ public class DiscoBaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         holder.mAuthorTv.setText(data.who);
         holder.mDateTv.setText(TransfUtil.formatPublishedAt(time));
 
+        holder.mRootRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.itemClickListener(url);
+                }
+            }
+        });
     }
 
+    public interface OnItemClickListener {
+
+        void itemClickListener(String url);
+
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     @Override
     public int getItemViewType(int position) {
@@ -110,6 +130,9 @@ public class DiscoBaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Bind(R.id.tv_disco_classify_date)
         TextView mDateTv;
+
+        @Bind(R.id.rl_disco_classify_root)
+        RelativeLayout mRootRl;
 
         public DiscoViewHolder(View itemView) {
             super(itemView);

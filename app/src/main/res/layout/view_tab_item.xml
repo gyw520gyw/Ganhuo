@@ -10,15 +10,15 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:focusable="false"
-        android:src="@mipmap/ic_launcher">
-    </ImageView>
+        android:paddingTop="2dp"
+        android:src="@mipmap/ic_launcher"></ImageView>
 
     <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10dp"
-        android:textColor="@color/main_01_font_color_selector">
-    </TextView>
+        android:paddingBottom="2dp"
+        android:textColor="@color/main_01_font_color_selector"
+        android:textSize="10dp"></TextView>
 
 </LinearLayout>

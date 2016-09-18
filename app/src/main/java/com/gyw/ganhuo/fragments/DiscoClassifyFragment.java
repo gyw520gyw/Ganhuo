@@ -4,17 +4,15 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.gyw.ganhuo.R;
+import com.gyw.ganhuo.activitys.ContainerActivity;
 import com.gyw.ganhuo.adapters.DiscoBaseAdapter;
-import com.gyw.ganhuo.adapters.MainGrilAdapter;
 import com.gyw.ganhuo.base.BaseFragment;
-import com.gyw.ganhuo.http.GanUri;
 import com.gyw.ganhuo.model.GanData;
 import com.gyw.ganhuo.presenter.GrilPresenter;
 import com.gyw.ganhuo.presenter.view.GrilView;
@@ -26,7 +24,7 @@ import java.util.List;
 import butterknife.Bind;
 
 
-public class DiscoClassifyFragment extends BaseFragment<GrilPresenter> implements GrilView {
+public class DiscoClassifyFragment extends BaseFragment<GrilPresenter> implements GrilView, DiscoBaseAdapter.OnItemClickListener {
 
     private static final String ARG_PARAM1 = "param1";
 
@@ -72,7 +70,7 @@ public class DiscoClassifyFragment extends BaseFragment<GrilPresenter> implement
 
     @Override
     protected void initView() {
-//第一次进入页面的时候显示加载进度条
+    //第一次进入页面的时候显示加载进度条
         mRefreshLayout.setProgressViewOffset(false, 0, (int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources()
                         .getDisplayMetrics()));
@@ -167,9 +165,18 @@ public class DiscoClassifyFragment extends BaseFragment<GrilPresenter> implement
 
         if (adapter == null) {
             adapter = new DiscoBaseAdapter(ganDataList);
+            adapter.setOnItemClickListener(this);
             mRecyclerView.setAdapter(adapter);
         } else {
             adapter.notifyDataSetChanged();
         }
+    }
+
+    //点击进入详情
+    @Override
+    public void itemClickListener(String url) {
+        Bundle bundle = new Bundle();
+        bundle.putString(BaseFragment.ARG_PARAM1, url);
+        ContainerActivity.startA(bundle, ContainerActivity.PageType.DISCO_CLASSIFY_FRAGMENT);
     }
 }

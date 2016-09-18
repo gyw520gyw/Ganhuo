@@ -2,13 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp">
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    android:layout_marginTop="6dp">
 
-    <ImageView
+    <com.gyw.ganhuo.weiget.RatioImageView
         android:id="@+id/iv_gril_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitCenter"/>
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/tv_gril_item"
@@ -19,6 +21,6 @@
         android:gravity="right"
         android:textSize="@dimen/m_font_size"
         android:background="@color/black66"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white66"/>
 
 </RelativeLayout>

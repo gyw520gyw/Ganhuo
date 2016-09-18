@@ -1,15 +1,10 @@
 package com.gyw.ganhuo.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.gyw.ganhuo.R;
-import com.gyw.ganhuo.http.GanApi;
-import com.gyw.ganhuo.http.MainFactory;
 import com.gyw.ganhuo.utils.StatusBarUtil;
 
 /**
@@ -26,7 +21,10 @@ public abstract class BaseActivity extends FragmentActivity {
         setStatusBar();
         initView();
         initData();
+        initFragment(savedInstanceState);
     }
+
+
 
     public void setStatusBar() {
         StatusBarUtil.setColor(this, ContextCompat.getColor(this, R.color.colorPrimary));
@@ -38,5 +36,9 @@ public abstract class BaseActivity extends FragmentActivity {
 
     protected abstract void initData();
     protected abstract void initView();
+
+    protected void initFragment(Bundle savedInstanceState) {
+
+    }
 
 }
