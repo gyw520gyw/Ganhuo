@@ -52,7 +52,7 @@ http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0327/2650.html
 1.添加加载更多功能;
 
 
-参考:
+参考:<br/>
 Glide : http://blog.csdn.net/shangmingchao/article/details/51125554 , 有很多方法的解释;
 
 
@@ -60,26 +60,31 @@ Glide : http://blog.csdn.net/shangmingchao/article/details/51125554 , 有很多�
 2016.09.12<br/>
 1.初步写了发现模块, 将其分成各个技术模块(android/iOS) ;
 
-参考:
+参考:<br/>
 TabLayout 结合 ViewPager : http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html
 
 
 2016.09.13<br/>
 1.初步完成发现模块,二级跳转页面还没有写;
 
-参考:
+参考:<br/>
 TabLayout : http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html
-问题:
+问题:<br/>
 TabLayout中的文字如果是字母,那字母都是大写,如何修改?
 
 
-2016.09.14
+2016.09.14<br/>
 1. 添加发现模块的加载更多的footer;
 
-参考:
+参考:<br/>
 RecyclerView加载更多添加footer:  http://blog.csdn.net/dalancon/article/details/46125667
 此种方法简单, 感觉不适合配合TabLayout一起使用,TotalCount不好判断;
 
 
-2016.09.18
+2016.09.18<br/>
 1. 添加发现模块详情页;
+
+2016.09.18<br/>
+1. 优化福利首页显示和点击效果;<br/>
+2. 添加福利模块详情页(直接跳到视频页,效果不是很好);<br/>
+3. 使用Snackbar提示加载数据错误的情况,并且点击重启;<br/>

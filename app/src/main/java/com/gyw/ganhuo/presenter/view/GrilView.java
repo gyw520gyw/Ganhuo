@@ -14,4 +14,7 @@ public interface GrilView extends IBaseView<List<GanData>> {
 
     //数据请求完成
     void getDataFinished();
+
+    //显示错误页
+    void showErrorView();
 }

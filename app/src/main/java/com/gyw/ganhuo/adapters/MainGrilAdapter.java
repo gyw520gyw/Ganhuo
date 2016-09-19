@@ -1,17 +1,16 @@
 package com.gyw.ganhuo.adapters;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.gyw.ganhuo.R;
 import com.gyw.ganhuo.model.GanData;
 import com.gyw.ganhuo.utils.DisplayUtil;
@@ -32,6 +31,8 @@ public class MainGrilAdapter extends RecyclerView.Adapter<MainGrilAdapter.GrilVi
 
     private List<GanData> list;
 
+    private OnItemClickListener listener;
+
     public MainGrilAdapter(List<GanData> list) {
         this.list = list;
     }
@@ -43,12 +44,24 @@ public class MainGrilAdapter extends RecyclerView.Adapter<MainGrilAdapter.GrilVi
         return holder;
     }
 
+    float y = 0;
+
     @Override
-    public void onBindViewHolder(GrilViewHolder holder, int position) {
+    public void onBindViewHolder(final GrilViewHolder holder, int position) {
 
         GanData data = list.get(position);
         String url = data.url;
         String time = data.publishedAt;
+
+        //保证视觉上左右中的间隔相等
+        int padding = DisplayUtil.dip2px(UiUtil.getContext(), 3);
+
+        if (position % 2 == 0) {
+            holder.mRootRl.setPadding(padding, 0, 0, 0);
+
+        } else {
+            holder.mRootRl.setPadding(0, 0, padding, 0);
+        }
 
         Glide.with(UiUtil.getContext())
                 .load(url)
@@ -60,8 +73,65 @@ public class MainGrilAdapter extends RecyclerView.Adapter<MainGrilAdapter.GrilVi
                 .centerCrop()
                 .into(holder.mItemIv);
 
-        holder.mItemTv.setText(TransfUtil.formatPublishedAt(time));
+        final String[] dataArr = data.desc.split("#####");
+
+        holder.mItemTv.setText(TransfUtil.formatPublishedAt(time)/* + "  " + dataArr[0]*/);
+
+
+        final float scale = 0.95f;
+
+        holder.mRootRl.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        y = event.getY();
+                        ObjectAnimator ax = ObjectAnimator.ofFloat(v, "scaleX", new float[]{1.0f, scale});
+                        ObjectAnimator ay = ObjectAnimator.ofFloat(v, "scaleY", new float[]{1.0f, scale});
+                        AnimatorSet all = new AnimatorSet();
+                        all.play(ax).with(ay);
+                        all.setDuration(200);
+                        all.start();
+                    case MotionEvent.ACTION_MOVE:
+                        float dy = Math.abs(event.getY() - y);
+                        if (dy < 20) {
+                            break;
+                        }
+                    case MotionEvent.ACTION_CANCEL:
+                    case MotionEvent.ACTION_UP:
+                        ax = ObjectAnimator.ofFloat(v, "scaleX", new float[]{scale, 1.0f});
+                        ay = ObjectAnimator.ofFloat(v, "scaleY", new float[]{scale, 1.0f});
+                        all = new AnimatorSet();
+                        all.play(ax).with(ay);
+                        all.setDuration(200);
+                        all.start();
+
+                        //是抬起手指才进入
+                        if(event.getAction() == MotionEvent.ACTION_UP) {
+
+                            if (listener != null) {
+                                listener.itemClickListener(dataArr[1], holder.mRootRl);
+                            }
+                        }
+
+
+                        break;
+                }
+
+                return true;
+            }
+        });
     }
+
+    public interface OnItemClickListener {
+        void itemClickListener(String str, View view);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
 
     @Override
     public int getItemCount() {
@@ -76,12 +146,14 @@ public class MainGrilAdapter extends RecyclerView.Adapter<MainGrilAdapter.GrilVi
         @Bind(R.id.tv_gril_item)
         TextView mItemTv;
 
+        @Bind(R.id.rl_gril_item_root)
+        RelativeLayout mRootRl;
+
         public GrilViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
             mItemIv.setOriginalSize(3, 4);
-
 
         }
     }

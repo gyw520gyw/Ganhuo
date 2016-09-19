@@ -7,4 +7,6 @@ public interface IBaseView<T> {
 	 * @param 服务器返回的数据
 	 */
 	void handleData(T t);
+
+
 }

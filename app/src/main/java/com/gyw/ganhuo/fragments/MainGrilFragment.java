@@ -1,5 +1,7 @@
 package com.gyw.ganhuo.fragments;
 
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -7,15 +9,19 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.gyw.ganhuo.R;
+import com.gyw.ganhuo.activitys.ContainerActivity;
 import com.gyw.ganhuo.adapters.MainGrilAdapter;
 import com.gyw.ganhuo.base.BaseFragment;
 import com.gyw.ganhuo.http.GanUri;
 import com.gyw.ganhuo.model.GanData;
+import com.gyw.ganhuo.presenter.DiscoPresenter;
 import com.gyw.ganhuo.presenter.GrilPresenter;
 import com.gyw.ganhuo.presenter.view.GrilView;
 import com.gyw.ganhuo.utils.LogUtil;
+import com.gyw.ganhuo.utils.UiUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +32,7 @@ import butterknife.Bind;
 /**
  * 首页福利模块
  */
-public class MainGrilFragment extends BaseFragment<GrilPresenter> implements GrilView {
+public class MainGrilFragment extends BaseFragment<GrilPresenter> implements GrilView, MainGrilAdapter.OnItemClickListener {
 
     @Bind(R.id.rv_main_gril)
     RecyclerView mRecyclerView;
@@ -70,7 +76,7 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
     @Override
     protected void initData() {
         p = new GrilPresenter(mContext, this);
-        p.getDataFromServer(GanUri.TYPE_FULI, mCurrentPage);
+        p.getDataFromServer(GanUri.TYPE_FULI, GanUri.TYPE_VEDIO, mCurrentPage);
     }
 
 
@@ -86,7 +92,7 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
 
                 mCurrentPage = 1;
 
-                p.getDataFromServer(GanUri.TYPE_FULI, mCurrentPage);
+                p.getDataFromServer(GanUri.TYPE_FULI, GanUri.TYPE_VEDIO, mCurrentPage);
 
             }
         });
@@ -115,11 +121,12 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
         });
     }
 
+    //加载更多数据
     private void loadMoreData() {
 
         LogUtil.d("mCurrentPage : " + mCurrentPage);
 
-        p.getDataFromServer(GanUri.TYPE_FULI, mCurrentPage);
+        p.getDataFromServer(GanUri.TYPE_FULI, GanUri.TYPE_VEDIO, mCurrentPage);
     }
 
 
@@ -140,6 +147,7 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
 
         if (adapter == null) {
             adapter = new MainGrilAdapter(ganDataList);
+            adapter.setOnItemClickListener(this);
             mRecyclerView.setAdapter(adapter);
         } else {
             adapter.notifyDataSetChanged();
@@ -160,4 +168,30 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
         }, 1000);
 
     }
+
+    @Override
+    public void showErrorView() {
+        Snackbar.make(mRefreshLayout, R.string.error_index_load, Snackbar.LENGTH_LONG)
+                .setAction("重试", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        mRefreshLayout.setRefreshing(true);
+                        p.getDataFromServer(GanUri.TYPE_FULI, GanUri.TYPE_VEDIO, mCurrentPage);
+                    }
+                }).show();
+    }
+
+    //点击item的事件
+    @Override
+    public void itemClickListener(String str, View view) {
+
+        Toast.makeText(UiUtil.getContext(), "进入应用", Toast.LENGTH_SHORT).show();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(BaseFragment.ARG_PARAM1, str);
+        ContainerActivity.startA(bundle, ContainerActivity.PageType.DISCO_DETAIL_FRAGMENT);
+
+    }
+
 }

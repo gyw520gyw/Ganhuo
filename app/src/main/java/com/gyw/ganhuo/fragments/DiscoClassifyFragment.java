@@ -1,6 +1,7 @@
 package com.gyw.ganhuo.fragments;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,7 @@ import com.gyw.ganhuo.activitys.ContainerActivity;
 import com.gyw.ganhuo.adapters.DiscoBaseAdapter;
 import com.gyw.ganhuo.base.BaseFragment;
 import com.gyw.ganhuo.model.GanData;
-import com.gyw.ganhuo.presenter.GrilPresenter;
+import com.gyw.ganhuo.presenter.DiscoPresenter;
 import com.gyw.ganhuo.presenter.view.GrilView;
 import com.gyw.ganhuo.utils.LogUtil;
 
@@ -24,7 +25,7 @@ import java.util.List;
 import butterknife.Bind;
 
 
-public class DiscoClassifyFragment extends BaseFragment<GrilPresenter> implements GrilView, DiscoBaseAdapter.OnItemClickListener {
+public class DiscoClassifyFragment extends BaseFragment<DiscoPresenter> implements GrilView, DiscoBaseAdapter.OnItemClickListener {
 
     private static final String ARG_PARAM1 = "param1";
 
@@ -84,7 +85,7 @@ public class DiscoClassifyFragment extends BaseFragment<GrilPresenter> implement
 
     @Override
     protected void initData() {
-        p = new GrilPresenter(mContext, this);
+        p = new DiscoPresenter(mContext, this);
         p.getDataFromServer(mTitle, mCurrentPage);
     }
 
@@ -148,6 +149,19 @@ public class DiscoClassifyFragment extends BaseFragment<GrilPresenter> implement
         }, 1000);
     }
 
+    @Override
+    public void showErrorView() {
+        Snackbar.make(mRefreshLayout, R.string.error_index_load, Snackbar.LENGTH_LONG)
+                .setAction("重试", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        mRefreshLayout.setRefreshing(true);
+                        p.getDataFromServer(mTitle, mCurrentPage);
+                    }
+                }).show();
+    }
+
     private List<GanData> ganDataList = new ArrayList<>();
 
     @Override
@@ -177,6 +191,6 @@ public class DiscoClassifyFragment extends BaseFragment<GrilPresenter> implement
     public void itemClickListener(String url) {
         Bundle bundle = new Bundle();
         bundle.putString(BaseFragment.ARG_PARAM1, url);
-        ContainerActivity.startA(bundle, ContainerActivity.PageType.DISCO_CLASSIFY_FRAGMENT);
+        ContainerActivity.startA(bundle, ContainerActivity.PageType.DISCO_DETAIL_FRAGMENT);
     }
 }

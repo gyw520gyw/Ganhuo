@@ -10,13 +10,16 @@ import android.view.ViewGroup;
 import com.gyw.ganhuo.R;
 import com.gyw.ganhuo.adapters.MainGrilAdapter;
 import com.gyw.ganhuo.base.BaseFragment;
-import com.gyw.ganhuo.presenter.GrilPresenter;
+import com.gyw.ganhuo.presenter.DiscoPresenter;
 import com.gyw.ganhuo.presenter.view.GrilView;
 
 import butterknife.Bind;
 
-
-public abstract class BaseRefeshFragment extends BaseFragment<GrilPresenter> implements GrilView {
+/**
+ * 刷新和加载更多的基类
+ * TODO 还没有完成
+ */
+public abstract class BaseRefeshFragment extends BaseFragment<DiscoPresenter> implements GrilView {
 
 //    @Bind(R.id.rv_main_gril)
 //    RecyclerView mRecyclerView;

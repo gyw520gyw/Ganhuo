@@ -48,11 +48,17 @@ public class ContainerActivity extends BaseActivity {
 
             switch (mPageType) {
 
-                case DISCO_CLASSIFY_FRAGMENT:
+                case DISCO_DETAIL_FRAGMENT:
 
                     fragment = DiscoDetailFragment.newInstance(bundle);
 
                     break;
+
+//                case GRIL_DETIAL_FRAGMENT:
+//
+//                    fragment = DiscoDetailFragment.newInstance(bundle);
+//
+//                    break;
 
             }
 
@@ -63,7 +69,7 @@ public class ContainerActivity extends BaseActivity {
     }
 
     public enum PageType {
-        DISCO_CLASSIFY_FRAGMENT;
+        DISCO_DETAIL_FRAGMENT,  GRIL_DETIAL_FRAGMENT;
     }
 
 
