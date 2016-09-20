@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.gyw.ganhuo.R;
 import com.gyw.ganhuo.base.BaseActivity;
 import com.gyw.ganhuo.base.BaseFragment;
+import com.gyw.ganhuo.fragments.AboutUsFragment;
 import com.gyw.ganhuo.fragments.DiscoDetailFragment;
 import com.gyw.ganhuo.utils.UiUtil;
 
@@ -56,9 +57,15 @@ public class ContainerActivity extends BaseActivity {
 
 //                case GRIL_DETIAL_FRAGMENT:
 //
-//                    fragment = DiscoDetailFragment.newInstance(bundle);
+//                    fragment = GrilDetailFragment.newInstance(bundle);
 //
 //                    break;
+
+                case MINE_ABOUT_US_FRAGMENT:
+
+                    fragment = AboutUsFragment.newInstance(bundle);
+
+                    break;
 
             }
 
@@ -69,7 +76,7 @@ public class ContainerActivity extends BaseActivity {
     }
 
     public enum PageType {
-        DISCO_DETAIL_FRAGMENT,  GRIL_DETIAL_FRAGMENT;
+        DISCO_DETAIL_FRAGMENT,  GRIL_DETAIL_FRAGMENT, MINE_ABOUT_US_FRAGMENT;
     }
 
 

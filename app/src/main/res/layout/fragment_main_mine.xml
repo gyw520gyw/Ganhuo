@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:rs="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <com.gyw.ganhuo.weiget.TopBar
@@ -10,9 +10,120 @@
         android:layout_height="wrap_content"
         app:centerText="@string/main_mine"
         app:isShowLeft="false"
-        app:isShowRight="false">
-    </com.gyw.ganhuo.weiget.TopBar>
+        app:isShowRight="false"></com.gyw.ganhuo.weiget.TopBar>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@mipmap/main_01_03_mine_bg">
+
+
+        <com.gyw.ganhuo.weiget.RoundedImageView
+            android:id="@+id/iv_mine_head_pic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/test"
+            app:roundedBorderColor="@color/white"
+            app:roundedBorderThickness="1dp"></com.gyw.ganhuo.weiget.RoundedImageView>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_mine_about_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/disco_classify_bg_color_selector"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/mine_about_us"
+            android:textColor="@color/main_font_color_565656"
+            android:textSize="@dimen/m_font_size" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/main_01_03_mine_arrow" />
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/black22" />
+
+    <RelativeLayout
+        android:id="@+id/rl_mine_collection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/disco_classify_bg_color_selector"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/mine_collection"
+            android:textColor="@color/main_font_color_565656"
+            android:textSize="@dimen/m_font_size" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/main_01_03_mine_arrow" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/black22" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_mine_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/disco_classify_bg_color_selector"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/mine_feedback"
+            android:textColor="@color/main_font_color_565656"
+            android:textSize="@dimen/m_font_size" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/main_01_03_mine_arrow" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/black22" />
 
 
 </LinearLayout>

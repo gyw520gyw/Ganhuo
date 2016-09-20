@@ -107,7 +107,7 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
                 int totalItemCount = layoutManager.getItemCount();
                 int pastVisibleItems = layoutManager.findFirstVisibleItemPositions(new int[2])[1];
 
-                LogUtil.d("visibleItemCount : " + visibleItemCount + " totalItemCount : " + totalItemCount + " pastVisibleItems :  " + pastVisibleItems);
+//                LogUtil.d("visibleItemCount : " + visibleItemCount + " totalItemCount : " + totalItemCount + " pastVisibleItems :  " + pastVisibleItems);
 
                 if (!mRefreshLayout.isRefreshing() && (visibleItemCount + pastVisibleItems) > totalItemCount) {
 
@@ -171,8 +171,8 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
 
     @Override
     public void showErrorView() {
-        Snackbar.make(mRefreshLayout, R.string.error_index_load, Snackbar.LENGTH_LONG)
-                .setAction("重试", new View.OnClickListener() {
+        Snackbar.make(mRefreshLayout, R.string.error_desc, Snackbar.LENGTH_LONG)
+                .setAction(UiUtil.getString(R.string.error_desc), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 

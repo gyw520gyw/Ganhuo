@@ -18,6 +18,7 @@ import com.gyw.ganhuo.model.GanData;
 import com.gyw.ganhuo.presenter.DiscoPresenter;
 import com.gyw.ganhuo.presenter.view.GrilView;
 import com.gyw.ganhuo.utils.LogUtil;
+import com.gyw.ganhuo.utils.UiUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -151,8 +152,8 @@ public class DiscoClassifyFragment extends BaseFragment<DiscoPresenter> implemen
 
     @Override
     public void showErrorView() {
-        Snackbar.make(mRefreshLayout, R.string.error_index_load, Snackbar.LENGTH_LONG)
-                .setAction("重试", new View.OnClickListener() {
+        Snackbar.make(mRefreshLayout, R.string.error_desc, Snackbar.LENGTH_LONG)
+                .setAction(UiUtil.getString(R.string.error_desc), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
