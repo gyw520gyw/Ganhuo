@@ -10,6 +10,7 @@ import com.gyw.ganhuo.R;
 import com.gyw.ganhuo.adapters.MainDisoAdapter;
 import com.gyw.ganhuo.base.BaseFragment;
 import com.gyw.ganhuo.utils.UiUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,5 +64,14 @@ public class MainDiscoFragment extends BaseFragment {
     @Override
     protected void initListener() {
 
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
 }

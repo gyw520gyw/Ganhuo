@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/imageview"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:focusable="false"
         android:paddingTop="2dp"
         android:src="@mipmap/ic_launcher"></ImageView>
@@ -19,6 +19,6 @@
         android:layout_height="wrap_content"
         android:paddingBottom="2dp"
         android:textColor="@color/main_01_font_color_selector"
-        android:textSize="10dp"></TextView>
+        android:textSize="12dp"></TextView>
 
 </LinearLayout>

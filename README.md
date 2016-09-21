@@ -1,3 +1,16 @@
+###Ganhuo
+
+Android 使用干货集中营提供的API, 该项目为练习使用, 主要为了学习使用 MVP、RxJava、Retrofit 等知识点; 
+使用该接口创作的app非常多, 大多数android使用的是material design设计风格, 但是在国内这种风格使用率还不高, 大多数用的是底部带按钮的iOS风格...
+
+
+###截图: 
+![sample](./screenshot/Screenshot1.png)  ![sample](./Screenshot2.png)
+![sample](./screenshot/Screenshot3.png)  ![sample](./Screenshot4.png)
+
+
+###记录:
+
 2016.04.14<br>
 创建项目Ganhuo
 
@@ -91,3 +104,13 @@ RecyclerView加载更多添加footer:  http://blog.csdn.net/dalancon/article/det
 
 2016.09.20<br/>
 1. 初步实现我的模块中关于我们;
+
+
+2016.09.21
+1. 实现关于我们中的Html在TextView中时的页面跳转;
+2. 添加umeng统计功能(umeng反馈不维护了,集成之后又删掉了);
+
+参考:<br/>
+TextView中带html标签 : http://stackoverflow.com/questions/12119800/android-set-link-with-a-href-in-textview
+推荐阅读:<br/>
+Glide : http://gold.xitu.io/post/57df609767f3560056b03672

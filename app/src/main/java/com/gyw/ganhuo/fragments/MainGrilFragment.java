@@ -22,6 +22,7 @@ import com.gyw.ganhuo.presenter.GrilPresenter;
 import com.gyw.ganhuo.presenter.view.GrilView;
 import com.gyw.ganhuo.utils.LogUtil;
 import com.gyw.ganhuo.utils.UiUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +108,7 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
                 int totalItemCount = layoutManager.getItemCount();
                 int pastVisibleItems = layoutManager.findFirstVisibleItemPositions(new int[2])[1];
 
-//                LogUtil.d("visibleItemCount : " + visibleItemCount + " totalItemCount : " + totalItemCount + " pastVisibleItems :  " + pastVisibleItems);
+                LogUtil.d("visibleItemCount : " + visibleItemCount + " totalItemCount : " + totalItemCount + " pastVisibleItems :  " + pastVisibleItems);
 
                 if (!mRefreshLayout.isRefreshing() && (visibleItemCount + pastVisibleItems) > totalItemCount) {
 
@@ -115,6 +116,7 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
 
                     mCurrentPage = mCurrentPage + 1;
 
+                    mRefreshLayout.setRefreshing(true);
                     loadMoreData();
                 }
             }
@@ -186,12 +188,21 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
     @Override
     public void itemClickListener(String str, View view) {
 
-        Toast.makeText(UiUtil.getContext(), "进入应用", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(UiUtil.getContext(), "进入应用", Toast.LENGTH_SHORT).show();
 
         Bundle bundle = new Bundle();
         bundle.putString(BaseFragment.ARG_PARAM1, str);
         ContainerActivity.startA(bundle, ContainerActivity.PageType.DISCO_DETAIL_FRAGMENT);
 
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
 
 }

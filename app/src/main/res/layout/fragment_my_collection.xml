@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:rs="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <com.gyw.ganhuo.weiget.TopBar
+        android:id="@+id/topbar_about_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:isShowLeft="false"
+        app:isShowRight="false">
+    </com.gyw.ganhuo.weiget.TopBar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_marginTop="100dp"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/loading_icon"/>
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="功能规划中..."/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

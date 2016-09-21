@@ -16,7 +16,7 @@ public class LogUtil {
     // 关闭log
 //	private static final boolean IS_DEBUG = false;
 
-    private static final String TAG = "gyw";
+    private static final String TAG = "gtest";
 
     public static void v(String msg) {
         if (IS_DEBUG) {

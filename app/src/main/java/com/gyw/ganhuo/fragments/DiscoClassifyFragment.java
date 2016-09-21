@@ -19,6 +19,7 @@ import com.gyw.ganhuo.presenter.DiscoPresenter;
 import com.gyw.ganhuo.presenter.view.GrilView;
 import com.gyw.ganhuo.utils.LogUtil;
 import com.gyw.ganhuo.utils.UiUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -193,5 +194,14 @@ public class DiscoClassifyFragment extends BaseFragment<DiscoPresenter> implemen
         Bundle bundle = new Bundle();
         bundle.putString(BaseFragment.ARG_PARAM1, url);
         ContainerActivity.startA(bundle, ContainerActivity.PageType.DISCO_DETAIL_FRAGMENT);
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
 }

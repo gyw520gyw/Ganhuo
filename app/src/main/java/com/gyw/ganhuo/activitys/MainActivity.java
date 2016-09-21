@@ -13,6 +13,7 @@ import com.gyw.ganhuo.base.BaseActivity;
 import com.gyw.ganhuo.fragments.MainDiscoFragment;
 import com.gyw.ganhuo.fragments.MainGrilFragment;
 import com.gyw.ganhuo.fragments.MainMineFragment;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 
@@ -44,7 +45,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        //Umeng统计使用
+        MobclickAgent.openActivityDurationTrack(false);
     }
 
     /**
@@ -86,6 +88,16 @@ public class MainActivity extends BaseActivity {
         textView.setText(mTextviewArray[index]);
 
         return view;
+    }
+
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);       //统计时长
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

@@ -4,6 +4,7 @@ package com.gyw.ganhuo.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.gyw.ganhuo.utils.PackageUtil;
 import com.gyw.ganhuo.utils.UiUtil;
 import com.gyw.ganhuo.weiget.CustomWebView;
 import com.gyw.ganhuo.weiget.TopBar;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.Bind;
 
@@ -66,14 +68,16 @@ public class AboutUsFragment extends BaseFragment {
                 "<p><a href='https://github.com/gyw520gyw/Ganhuo'>https://github.com/gyw520gyw/Ganhuo</a> </P>"+
                 "<p><strong>报告错误：</strong></P>"+
                 "<p><a href='https://github.com/gyw520gyw/Ganhuo/issues'>https://github.com/gyw520gyw/Ganhuo/issues </a> </P>"+
-                "<p><strong>感谢：</strong></P>"+
+                "<p><strong>鸣谢：</strong></P>"+
                 "<p><a href='https://github.com/daimajia'>@代码家 </a> <br/> " +
                 " <a href='<a href='https://github.com/drakeet/Meizhi'>@drakeet </a> <br/>" +
-                " <a href='<a href='https://github.com/maoruibin/GankDaily'>@maoruibin </a> </P>"+
+                " <a href='<a href='https://github.com/maoruibin/GankDaily'>@maoruibin </a> <br/> " +
+                " 所有的开源开发者</P>"+
                 "</body></html>";
 
         mContentTv.setText(Html.fromHtml(content));
-
+        mContentTv.setClickable(true);
+        mContentTv.setMovementMethod(LinkMovementMethod.getInstance());
 
 
     }
@@ -87,5 +91,15 @@ public class AboutUsFragment extends BaseFragment {
         AboutUsFragment fragment = new AboutUsFragment();
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
 }

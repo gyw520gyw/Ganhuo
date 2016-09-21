@@ -100,10 +100,10 @@ public class CustomWebView extends LinearLayout {
 		webSettings.setBuiltInZoomControls(false);
 		webSettings.setDefaultFontSize(16);
 
-		if (url == null) {
-			mWebView.loadData(errorHtml, "text/html; charset=UTF-8", null);
-		} else {
+		if (url.startsWith("http:") || url.startsWith("https:")) {
 			mWebView.loadUrl(url);
+		} else {
+			mWebView.loadData(errorHtml, "text/html; charset=UTF-8", null);
 		}
 
 		// 设置WebViewClient

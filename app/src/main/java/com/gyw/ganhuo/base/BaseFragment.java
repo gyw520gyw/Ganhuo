@@ -24,6 +24,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
 	public static final String ARG_PARAM2 = "arg_param2";
 
 	public String arg_param1;
+	public String arg_param2;
 
 	protected BaseActivity mActivity;
 	protected View view = null;

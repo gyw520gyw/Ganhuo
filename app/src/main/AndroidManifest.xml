@@ -3,7 +3,12 @@
     package="com.gyw.ganhuo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:name=".global.MyApplication"
@@ -20,6 +25,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".activitys.ContainerActivity"></activity>
+
+
+        <!-- umeng相关 -->
+        <activity android:name="com.umeng.fb.ConversationActivity" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="57e2000a67e58effdc002dda" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Gtest" />
+
+
     </application>
 
 </manifest>

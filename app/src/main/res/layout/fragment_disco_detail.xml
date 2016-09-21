@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <com.gyw.ganhuo.weiget.TopBar
-        android:id="@+id/top_bar"
+        android:id="@+id/top_bar_disco_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:centerText="详情"
