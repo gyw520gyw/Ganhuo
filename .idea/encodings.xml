@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/app/libs/feedbackSdk.aar" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/libs/alisdk-ut-5.jar" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/libs/armeabi" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/libs/armeabi" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/libs/armeabi-v7a" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/libs/com.umeng.fb.5.4.0.jar" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/libs/feedbackSdk.aar" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/libs/mips" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/libs/securityguard-3.1.27.jar" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/libs/utdid4all-1.0.4.jar" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/libs/x86" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/src/main/res/anim" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/src/main/res/drawable" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/src/main/res/drawable-xhdpi" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/src/main/res/layout" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/src/main/res/values" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/librarygan/src/main/res/values-zh" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
