@@ -8,6 +8,10 @@ Android 使用干货集中营提供的API, 该项目为练习使用, 主要为�
 ![sample](./screenshot/Screenshot.jpg)
 
 
+##Download:
+[点击去下载~](http://fir.im/gnho)
+
+
 ##Record:
 
 
@@ -17,18 +21,18 @@ Android 使用干货集中营提供的API, 该项目为练习使用, 主要为�
 ###2016.04.15<br>
 实现网络请求
 
-#####参考： <br/>  
+参考： <br/>  
 http://gank.io/api<br>
 http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/1109/3662.html
 http://jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/1016/3588.html
 
-#####问题:<br/>
+问题:<br/>
 String BASE_API = "http://gank.io/api/data"
 和
 @GET("/{type}/{pageSize}/{pageIndex}")
 这样的写法,页面找不到404
 
-#####解决:<br/>
+解决:<br/>
 在第二个链接中找到的解决办法
 如果有前缀 / 就代表着是一个绝对路径。删除了那个前缀的 /， 你将会得到正确路径的全 URL。
 
@@ -37,7 +41,7 @@ String BASE_API = "http://gank.io/api/data"
 实现沉浸式状态栏
 
 
-#####参考：<br/>
+参考：<br/>
 https://github.com/laobie/StatusBarUtil
 
 
@@ -55,7 +59,7 @@ https://github.com/laobie/StatusBarUtil
 2.使用Glide加载图片;<br/>
 最近电脑出了点问题，只要一翻墙，就出现资源管理器不断重启，所以没有升级AndroidStudio..<br/>
 
-#####参考:<br/>
+参考:<br/>
 http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0327/2650.html
 
 
@@ -66,7 +70,7 @@ http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0327/2650.html
 1.添加加载更多功能;
 
 
-#####参考:<br/>
+参考:<br/>
 Glide : http://blog.csdn.net/shangmingchao/article/details/51125554 , 有很多方法的解释;
 
 
@@ -74,23 +78,23 @@ Glide : http://blog.csdn.net/shangmingchao/article/details/51125554 , 有很多�
 ###2016.09.12<br/>
 1.初步写了发现模块, 将其分成各个技术模块(android/iOS) ;
 
-#####参考:<br/>
+参考:<br/>
 TabLayout 结合 ViewPager : http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html
 
 
 ###2016.09.13<br/>
 1.初步完成发现模块,二级跳转页面还没有写;
 
-#####参考:<br/>
+参考:<br/>
 TabLayout : http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html
-#####问题:<br/>
+问题:<br/>
 TabLayout中的文字如果是字母,那字母都是大写,如何修改?
 
 
 ###2016.09.14<br/>
 1. 添加发现模块的加载更多的footer;
 
-#####参考:<br/>
+参考:<br/>
 RecyclerView加载更多添加footer:  http://blog.csdn.net/dalancon/article/details/46125667
 此种方法简单, 感觉不适合配合TabLayout一起使用,TotalCount不好判断;
 
@@ -111,7 +115,7 @@ RecyclerView加载更多添加footer:  http://blog.csdn.net/dalancon/article/det
 1. 实现关于我们中的Html在TextView中时的页面跳转;
 2. 添加umeng统计功能(umeng反馈不维护了,集成之后才知道);
 
-#####参考:<br/>
+参考:<br/>
 TextView中带html标签 : http://stackoverflow.com/questions/12119800/android-set-link-with-a-href-in-textview
 推荐阅读:<br/>
 Glide : http://gold.xitu.io/post/57df609767f3560056b03672
@@ -120,7 +124,8 @@ Glide : http://gold.xitu.io/post/57df609767f3560056b03672
 ###2016.09.22
 界面初步完成... <br/>
 
-#####已知问题:
+已知问题:
 1. 加载更多处理的不是很好, 需优化;
 2. 数据没有做缓存;
+3. 重复代码没有抽取;
 
