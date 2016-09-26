@@ -174,7 +174,7 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
     @Override
     public void showErrorView() {
         Snackbar.make(mRefreshLayout, R.string.error_desc, Snackbar.LENGTH_LONG)
-                .setAction(UiUtil.getString(R.string.error_desc), new View.OnClickListener() {
+                .setAction(UiUtil.getString(R.string.error_desc_action), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
