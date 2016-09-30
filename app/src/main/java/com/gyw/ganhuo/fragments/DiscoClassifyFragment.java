@@ -5,7 +5,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,7 @@ import java.util.List;
 import butterknife.Bind;
 
 
-public class DiscoClassifyFragment extends BaseFragment<DiscoPresenter> implements GrilView, DiscoBaseAdapter.OnItemClickListener {
+public class DiscoClassifyFragment extends BaseRefeshFragment<DiscoPresenter> implements GrilView, DiscoBaseAdapter.OnItemClickListener {
 
     private static final String ARG_PARAM1 = "param1";
 
@@ -43,11 +42,6 @@ public class DiscoClassifyFragment extends BaseFragment<DiscoPresenter> implemen
 
     @Bind(R.id.rv_disco_classify)
     RecyclerView mRecyclerView;
-
-
-    @Bind(R.id.srl_disco_classify)
-    SwipeRefreshLayout mRefreshLayout;
-
 
 
     public static DiscoClassifyFragment newInstance(String param1) {
@@ -73,16 +67,14 @@ public class DiscoClassifyFragment extends BaseFragment<DiscoPresenter> implemen
 
     @Override
     protected void initView() {
-    //第一次进入页面的时候显示加载进度条
-        mRefreshLayout.setProgressViewOffset(false, 0, (int) TypedValue
-                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources()
-                        .getDisplayMetrics()));
-        mRefreshLayout.setRefreshing(true);
+        super.initView();
+    }
 
+    @Override
+    protected void initRecyclerView() {
         //设置RecyclerView
         layoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(layoutManager);
-
     }
 
     @Override
@@ -132,6 +124,42 @@ public class DiscoClassifyFragment extends BaseFragment<DiscoPresenter> implemen
         });
     }
 
+    @Override
+    protected void onRefreshStart() {
+        isRefresh = true;
+
+        mCurrentPage = 1;
+
+        p.getDataFromServer(mTitle, mCurrentPage);
+
+    }
+
+    @Override
+    protected void onloadMoreData() {
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+//                mRefreshLayout.isRefreshing()
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
+
+                LogUtil.d("visibleItemCount : " + visibleItemCount + " totalItemCount : " + totalItemCount + " pastVisibleItems :  " + pastVisibleItems);
+
+                if (!mRefreshLayout.isRefreshing() && (visibleItemCount + pastVisibleItems) >= totalItemCount) {
+
+                    isRefresh = false;
+
+                    mCurrentPage = mCurrentPage + 1;
+
+                    loadMoreData();
+                }
+            }
+        });
+    }
+
 
     private void loadMoreData() {
 
@@ -143,12 +171,7 @@ public class DiscoClassifyFragment extends BaseFragment<DiscoPresenter> implemen
     @Override
     public void getDataFinished() {
         //数据加载完成
-        mRefreshLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mRefreshLayout.setRefreshing(false);
-            }
-        }, 1000);
+        getBaseDataFinished();
     }
 
     @Override

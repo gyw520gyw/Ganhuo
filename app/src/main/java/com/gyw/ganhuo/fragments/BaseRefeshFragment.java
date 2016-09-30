@@ -3,31 +3,24 @@ package com.gyw.ganhuo.fragments;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.gyw.ganhuo.R;
 import com.gyw.ganhuo.adapters.MainGrilAdapter;
 import com.gyw.ganhuo.base.BaseFragment;
-import com.gyw.ganhuo.presenter.DiscoPresenter;
-import com.gyw.ganhuo.presenter.view.GrilView;
+import com.gyw.ganhuo.base.BasePresenter;
 
 import butterknife.Bind;
 
 /**
  * 刷新和加载更多的基类
- * TODO 还没有完成
  */
-public abstract class BaseRefeshFragment extends BaseFragment<DiscoPresenter> implements GrilView {
-
-//    @Bind(R.id.rv_main_gril)
-//    RecyclerView mRecyclerView;
+public abstract class BaseRefeshFragment<P extends BasePresenter> extends BaseFragment {
 
 
-    @Bind(R.id.srl_main_gril)
+    @Bind(R.id.srl_layout)
     SwipeRefreshLayout mRefreshLayout;
 
+    protected P p;
 
     private int mCurrentPage = 1;
 
@@ -35,12 +28,7 @@ public abstract class BaseRefeshFragment extends BaseFragment<DiscoPresenter> im
 
     private StaggeredGridLayoutManager layoutManager;
 
-
     private boolean isRefresh = true;   //是否是刷新,默认是刷新
-
-
-    @Override
-    protected abstract View initContentView(LayoutInflater inflater, ViewGroup container);
 
     @Override
     protected void initView() {
@@ -57,9 +45,6 @@ public abstract class BaseRefeshFragment extends BaseFragment<DiscoPresenter> im
 
     protected abstract void initRecyclerView();
 
-    @Override
-    protected abstract void initData();
-
 
     @Override
     protected void initListener() {
@@ -73,17 +58,16 @@ public abstract class BaseRefeshFragment extends BaseFragment<DiscoPresenter> im
             }
         });
 
-        loadMoreData();
+        onloadMoreData();
     }
 
     protected abstract void onRefreshStart();
 
-    protected abstract void loadMoreData();
+    protected abstract void onloadMoreData();
 
 
-    //TODO 后期提出去 需优化
-    @Override
-    public void getDataFinished() {
+    //TODO 后期提出去 需优话
+    public void getBaseDataFinished() {
 
         //数据加载完成
         mRefreshLayout.postDelayed(new Runnable() {
@@ -92,6 +76,5 @@ public abstract class BaseRefeshFragment extends BaseFragment<DiscoPresenter> im
                 mRefreshLayout.setRefreshing(false);
             }
         }, 1000);
-
     }
 }

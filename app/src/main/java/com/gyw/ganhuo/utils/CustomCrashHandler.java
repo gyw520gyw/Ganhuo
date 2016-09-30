@@ -155,7 +155,7 @@ public class CustomCrashHandler implements UncaughtExceptionHandler {
 		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 			File dir = new File(SDCARD_ROOT +File.separator+ "Ganhuo" + File.separator + "crash" + File.separator);
 			if (!dir.exists()) {
-				dir.mkdir();
+				dir.mkdirs();
 			}
 
 			try {

@@ -2,14 +2,11 @@ package com.gyw.ganhuo.fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.gyw.ganhuo.R;
 import com.gyw.ganhuo.activitys.ContainerActivity;
@@ -17,7 +14,6 @@ import com.gyw.ganhuo.adapters.MainGrilAdapter;
 import com.gyw.ganhuo.base.BaseFragment;
 import com.gyw.ganhuo.http.GanUri;
 import com.gyw.ganhuo.model.GanData;
-import com.gyw.ganhuo.presenter.DiscoPresenter;
 import com.gyw.ganhuo.presenter.GrilPresenter;
 import com.gyw.ganhuo.presenter.view.GrilView;
 import com.gyw.ganhuo.utils.LogUtil;
@@ -33,22 +29,16 @@ import butterknife.Bind;
 /**
  * 首页福利模块
  */
-public class MainGrilFragment extends BaseFragment<GrilPresenter> implements GrilView, MainGrilAdapter.OnItemClickListener {
+public class MainGrilFragment extends BaseRefeshFragment<GrilPresenter> implements GrilView, MainGrilAdapter.OnItemClickListener {
 
     @Bind(R.id.rv_main_gril)
     RecyclerView mRecyclerView;
-
-
-    @Bind(R.id.srl_main_gril)
-    SwipeRefreshLayout mRefreshLayout;
-
 
     private int mCurrentPage = 1;
 
     private MainGrilAdapter adapter;
 
     private StaggeredGridLayoutManager layoutManager;
-
 
     private boolean isRefresh = true;   //是否是刷新,默认是刷新
 
@@ -62,16 +52,14 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
     @Override
     protected void initView() {
 
-        //第一次进入页面的时候显示加载进度条
-        mRefreshLayout.setProgressViewOffset(false, 0, (int) TypedValue
-                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources()
-                        .getDisplayMetrics()));
-        mRefreshLayout.setRefreshing(true);
+        super.initView();
+    }
 
+    @Override
+    protected void initRecyclerView() {
         //设置RecyclerView
         layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
-
     }
 
     @Override
@@ -84,20 +72,23 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
     @Override
     protected void initListener() {
 
-        //TODO 后期提出去 需优化
-        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
+        super.initListener();
 
-                isRefresh = true;
+    }
 
-                mCurrentPage = 1;
+    @Override
+    protected void onRefreshStart() {
 
-                p.getDataFromServer(GanUri.TYPE_FULI, GanUri.TYPE_VEDIO, mCurrentPage);
+        isRefresh = true;
 
-            }
-        });
+        mCurrentPage = 1;
 
+        p.getDataFromServer(GanUri.TYPE_FULI, GanUri.TYPE_VEDIO, mCurrentPage);
+
+    }
+
+    @Override
+    protected void onloadMoreData() {
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -117,6 +108,7 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
                     mCurrentPage = mCurrentPage + 1;
 
                     mRefreshLayout.setRefreshing(true);
+
                     loadMoreData();
                 }
             }
@@ -161,14 +153,8 @@ public class MainGrilFragment extends BaseFragment<GrilPresenter> implements Gri
     @Override
     public void getDataFinished() {
 
-        //数据加载完成
-        mRefreshLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mRefreshLayout.setRefreshing(false);
-            }
-        }, 1000);
 
+        getBaseDataFinished();
     }
 
     @Override
