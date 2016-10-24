@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.gyw.ganhuo.R;
 import com.gyw.ganhuo.activitys.ContainerActivity;
 import com.gyw.ganhuo.base.BaseFragment;
@@ -46,11 +47,10 @@ public class MainMineFragment extends BaseFragment {
 
 //                Toast.makeText(mContext, "意见反馈", Toast.LENGTH_SHORT).show();
 
-                String url = "https://github.com/gyw520gyw/Ganhuo/issues";
 
-                bundle.putString(BaseFragment.ARG_PARAM1, url);
-                bundle.putString(BaseFragment.ARG_PARAM2, "意见反馈");
+                bundle.putString(BaseFragment.ARG_PARAM1, "意见反馈");
                 ContainerActivity.startA(bundle, ContainerActivity.PageType.MINE_FEEDBACK_FRAGMENT);
+
 
 
                 break;

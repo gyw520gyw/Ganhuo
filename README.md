@@ -133,3 +133,19 @@ Glide : http://gold.xitu.io/post/57df609767f3560056b03672<br/>
 1. 优化代码，将下拉刷新的代码放到基类中;
 
 
+###2016.10.24<br/>
+1. 修改意见反馈，使用第三方阿里百川反馈;<br/>http://baichuan.taobao.com/
+
+使用中遇到的问题：
+官方文档上写的，使用这个属性themeColor(标题栏自定义颜色 "#ffffff")，设置标题栏颜色，我设置了没有变化，不知道是什么原因;
+
+
+
+
+
+##效果: 
+![sample](./screenshot/ganhuo.gif)
+
+
+
+

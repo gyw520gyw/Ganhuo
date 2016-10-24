@@ -2,7 +2,9 @@ package com.gyw.ganhuo.activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
+import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.gyw.ganhuo.R;
 import com.gyw.ganhuo.base.BaseActivity;
 import com.gyw.ganhuo.base.BaseFragment;
@@ -12,6 +14,9 @@ import com.gyw.ganhuo.fragments.MyCollectionFragment;
 import com.gyw.ganhuo.utils.UiUtil;
 import com.gyw.ganhuo.weiget.TopBar;
 import com.umeng.analytics.MobclickAgent;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -83,12 +88,28 @@ public class ContainerActivity extends BaseActivity {
 
                 case MINE_FEEDBACK_FRAGMENT:    //意见反馈
 
-                    fragment = DiscoDetailFragment.newInstance(bundle);
+//                    fragment = DiscoDetailFragment.newInstance(bundle);
+
+                    Map<String, String> uiCustomInfoMap = new HashMap<String, String>();
+                    uiCustomInfoMap.put("themeColor", "#3F51B5");
+                    uiCustomInfoMap.put("pageTitle", "意见反馈");
+                    uiCustomInfoMap.put("hideLoginSuccess", "true");
+
+                    FeedbackAPI.setUICustomInfo(uiCustomInfoMap);
+
+                    FeedbackAPI.setCustomContact("test", false);
+
+                    Fragment feedbackFragment = FeedbackAPI.getFeedbackFragment();
+
+                    getSupportFragmentManager().beginTransaction().add(R.id.container, feedbackFragment, TAG).commit();
 
                     break;
             }
 
-            getSupportFragmentManager().beginTransaction().add(R.id.container, fragment, TAG).commit();
+            if(mPageType != PageType.MINE_FEEDBACK_FRAGMENT) {
+                getSupportFragmentManager().beginTransaction().add(R.id.container, fragment, TAG).commit();
+            }
+
         }
 
     }

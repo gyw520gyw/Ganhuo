@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
+import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.gyw.ganhuo.utils.CustomCrashHandler;
 
 
@@ -21,6 +22,8 @@ public class MyApplication extends Application {
 
 		mContext = this;
 		mHandler = new Handler();
+
+		FeedbackAPI.initAnnoy(this, Constant.ALI_APPKEY);
 
 	}
 

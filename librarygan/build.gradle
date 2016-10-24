@@ -19,6 +19,15 @@ android {
 }
 
 
+repositories {
+    mavenCentral()
+
+    flatDir {
+        dirs 'libs'
+    }
+
+}
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar', '*.arr'])
@@ -35,4 +44,12 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:design:23.2.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
+
+    compile 'com.android.support:support-v4:23.2.0'
+   /* compile(name:'feedbackSdk', ext:'aar')*/
+    compile files('libs/securityguard-3.1.27.jar')
+    compile files('libs/utdid4all-1.0.4.jar')
+    compile files('libs/alisdk-ut-5.jar')
+
+
 }
