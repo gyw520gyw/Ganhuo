@@ -17,7 +17,32 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
+
+    productFlavors {
+
+        androidyuan {}
+        androidhome {}
+        androidfen {}
+        anfenwang {}
+        anbei {}
+        pc6 {}
+        wandoujia {}
+
+        xiaomi {}
+        qh360 {}
+        baidu {}
+
+
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+
+    }
 }
+
+
 
 
 repositories {
@@ -37,3 +62,6 @@ dependencies {
 
 
 }
+
+
+
