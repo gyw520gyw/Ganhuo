@@ -13,6 +13,13 @@ Android 使用干货集中营提供的API, 该项目为练习使用, 主要为�
 
 
 ##Record:
+###2018.9.21<br/>
+1.替换为Retrofit2
+2.修改由于fitsSystemWindows引起底部导航错位的问题
+
+
+##Record:
+
 
 
 ###2016.04.14<br>
@@ -57,7 +64,7 @@ https://github.com/laobie/StatusBarUtil
 ###2016.09.06<br/>
 1.请求福利类型的接口成功，初步完成福利模块;<br/>
 2.使用Glide加载图片;<br/>
-最近电脑出了点问题，只要一翻墙，就出现资源管理器不断重启，所以没有升级AndroidStudio..<br/>
+
 
 参考:<br/>
 http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0327/2650.html
