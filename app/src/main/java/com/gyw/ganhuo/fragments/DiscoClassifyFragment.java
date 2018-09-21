@@ -97,6 +97,7 @@ public class DiscoClassifyFragment extends BaseRefeshFragment<DiscoPresenter> im
 
                 p.getDataFromServer(mTitle, mCurrentPage);
 
+
             }
         });
 

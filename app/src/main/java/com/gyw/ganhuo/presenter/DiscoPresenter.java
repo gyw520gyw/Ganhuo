@@ -1,6 +1,7 @@
 package com.gyw.ganhuo.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.gyw.ganhuo.base.BasePresenter;
 import com.gyw.ganhuo.http.GanUri;
@@ -61,12 +62,14 @@ public class DiscoPresenter extends BasePresenter<GrilView> {
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.d("goyw", e.toString());
                         mView.showErrorView();
                         mView.getDataFinished();
                     }
 
                     @Override
                     public void onNext(List<GanData> ganDatas) {
+                        Log.d("goyw", ganDatas.toString());
                         //处理数据
                         mView.handleData(ganDatas);
                         mView.getDataFinished();

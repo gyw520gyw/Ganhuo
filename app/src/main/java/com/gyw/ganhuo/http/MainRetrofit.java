@@ -3,9 +3,11 @@ package com.gyw.ganhuo.http;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
-import retrofit.RxJavaCallAdapterFactory;
+
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 /**
  * Created by Administrator on 2016/4/15.
@@ -26,6 +28,7 @@ public class MainRetrofit {
         mGanApi = retrofit.create(GanApi.class);
 
     }
+
 
 
     public GanApi getServer() {

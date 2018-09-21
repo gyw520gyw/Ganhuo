@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
         applicationId "com.gyw.ganhuo"
@@ -55,12 +55,10 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile project(':librarygan')
-    compile(name:'feedbackSdk', ext:'aar')
-
-
+    compile(name: 'feedbackSdk', ext: 'aar')
 }
 
 

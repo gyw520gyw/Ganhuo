@@ -4,8 +4,9 @@ package com.gyw.ganhuo.http;
 import com.gyw.ganhuo.model.GrilData;
 import com.gyw.ganhuo.model.VideoData;
 
-import retrofit.http.GET;
-import retrofit.http.Path;
+
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
